@@ -83,7 +83,13 @@ loginRouter.post('/register', async (req, res) => {
         console.log(error)
         res.json({message: error})
     }
+})
 
+loginRouter.get('/logout', (req, res) => {
+    req.session.destroy(error => {
+        if (error) return res.json({ error: error })
+    })
+    res.redirect('/api/sessions/login')
 })
 
 export default loginRouter;
